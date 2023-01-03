@@ -1,0 +1,5 @@
+CREATE TABLE `contacts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `observations` text DEFAULT NUL
