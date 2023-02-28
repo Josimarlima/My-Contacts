@@ -64,7 +64,7 @@
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":phone", $phone);
             $stmt->bindParam(":observations", $observations);
-            $stmt->bindParam(":id, $id");
+            $stmt->bindParam(":id", $id);
 
             try {
                 $stmt->execute();

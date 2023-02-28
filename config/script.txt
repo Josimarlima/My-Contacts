@@ -1,6 +1,21 @@
-CREATE TABLE contacts(
+CREATE TABLE contactsTeste(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     phone VARCHAR(20),
+    Zipcode VARCHAR(10),
+    road VARCHAR(25),
+    number INT(10),
+    neighborhood VARCHAR(50),
+    Complement VARCHAR (100),
+    city VARCHAR(50),
+    state  CHAR(2),
     observations TEXT
+);
+CREATE TABLE adress(
+
+    Zipcode 
+    road VARCHAR(25),
+    number INT(10),
+    neighborhood VARCHAR(30),
+    Complement VARCHAR (100),
 );
