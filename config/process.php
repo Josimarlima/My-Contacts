@@ -9,28 +9,29 @@
 
     if(!empty($data)) {
 
-        //cria o contato
-        if ($data["type"] === "create") {
+    //cria o contato
+    if ($data["type"] === "create") {
 
-            $name = $data["name"];
-            $phone = $data["phone"];
-            $observations = $data["observations"];
+        $name = $data["name"];
+        $phone = $data["phone"];
+        $observations = $data["observations"];
 
-            $query = "INSERT INTO contacts (name, phone, observation) VALUES (:name, :phone, :observations)";
+        $query = "INSERT INTO contacts (name, phone, observations) VALUES (:name, :phone, :observations)";
 
-            $stmt = $conn->prepare($query);
+        $stmt = $conn->prepare($query);
 
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":phone", $phone);
-            $stmt->bindParam(":observations", $observations);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":phone", $phone);
+        $stmt->bindParam(":observations", $observations);
 
-            try {
-                $stmt->execute();
-                $_SESSION["msg"] = "Contato adicionado com sucesso!";
-            } catch (PDOException $e) {
-                // verifica erros
-                $error = $e->getMessage();
-            }
+        try {
+            $stmt->execute();
+            $_SESSION["msg"] = "Contato adicionado com sucesso!";
+        } catch (PDOException $e) {
+            // verificando erro
+            $error = $e->getMessage();
+            echo "Erro: $error";
+        }
 
             //Deleta contato
         } else if ($data["type"] === "delete") {

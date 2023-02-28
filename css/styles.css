@@ -1,6 +1,16 @@
+/*config do logo*/
 .navbar-brand img {
     width: 50px;
 }
+
+.navbar-brand {
+    background-color: #0b3460;
+}
+/*menus da nav bar nav bar*/
+#home-link{
+    background-color: #0b3460;
+}
+
 
 #main-title {
     text-align: center;
@@ -15,7 +25,7 @@
 
 #contacts-table thead {
     color: #FFF;
-    background-color: #007BFF;
+    background-color: #0b3460;
 }
 
 .col-id {
@@ -44,7 +54,7 @@
     display: inline-block;
 }
 
-.delete-btn {
+.delete-form button {
     background-color: transparent;
     border: none;
     padding: 0;
@@ -85,9 +95,10 @@
     margin: 30px auto 0;
 }
 
+/*botão voltar*/
 #back-link {
-    border: 1px solid #007BFF;
-    color: #007BFF;
+    border: 1px solid #0b3460;
+    color: #0b3460;
     border-radius: 4px;
     padding: 5px;
 }
