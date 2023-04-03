@@ -25,16 +25,24 @@ if (isset($_SESSION['msg'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" id="home-link">
-            <a class="navbar-brand" href="<?= $BASE_URL ?>index.php">
-                <img src="<?= $BASE_URL ?>img/logo.svg" alt="Agenda">
-            </a>
-            <div>
-                <div class="navbar-nav">
-                    <a class="nav-link active" id="home-link" href="<?= $BASE_URL ?>index.php">Agenda</a>
-                    <a class="nav-link active" id="home-link" href=" <?= $BASE_URL ?>create.php">Adicionar Contato</a>
+    <body>
+        <header>
+            <div class="navbar navbar-expand-lg navbar-dark d-flex justify-content-between align-items-center" id="home-link">
+                <a class="navbar-brand" href="<?= $BASE_URL ?>">
+                    <img src="<?= $BASE_URL ?>img/logo.svg" alt="Agenda">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto d-flex">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $BASE_URL ?>index.php">Agenda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $BASE_URL ?>create.php">Adicionar Contato</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </nav>
-    </header>
+        </header>

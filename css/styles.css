@@ -3,6 +3,10 @@
     width: 50px;
 }
 
+.navbarNav{
+justify-content: flex-end;
+}
+
 .navbar-brand {
     background-color: #0b3460;
 }
@@ -19,13 +23,17 @@
 
 /* HOME */
 #contacts-table {
-    max-width: 800px;
     margin: 0 auto;
 }
 
 #contacts-table thead {
     color: #FFF;
     background-color: #0b3460;
+}
+
+/*  ajuste do tamanhao da linha sem quebra de texto*/
+#contacts-table td {
+    white-space: nowrap;
 }
 
 .col-id {
@@ -114,11 +122,20 @@
     margin: 0 auto;
 }
 
-/* MOBILE */
+/* Responsividade */
 @media(max-width: 480px) {
 
     #home-link {
         display: none;
+    }
+
+    /* ajuste de responsividade para dispositivos móveis */
+    #contacts-table {
+        font-size: 0.8rem;
+    }
+
+    .actions {
+        width: 120px;
     }
 
 }

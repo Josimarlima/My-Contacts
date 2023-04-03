@@ -4,29 +4,50 @@
 
     include_once ("connection.php");
     include_once ("url.php");
+    include_once ("address.php");
 
     $data = $_POST;
 
     if(!empty($data)) {
 
-    //cria o contato
+    // Cria o contato
     if ($data["type"] === "create") {
 
         $name = $data["name"];
         $phone = $data["phone"];
+        $cep = $data["cep"];
+        $complement = $data["complement"] ?? '';
         $observations = $data["observations"];
 
-        $query = "INSERT INTO contacts (name, phone, observations) VALUES (:name, :phone, :observations)";
+        // Faz a consulta ao ViaCEP
+        $viacep = new ViaCEP($cep);
+        $address_data = $viacep->getAddress();
+
+        // Verifica se o endereço foi encontrado
+        if (isset($address_data['erro'])) {
+            $_SESSION["msg"] = "CEP não encontrado!";
+            header("Location: {$BASE_URL}create.php");
+            exit;
+        }
+
+        $query = "INSERT INTO contacts (name, phone, cep, address, complement, neighborhood, city, state, observations) 
+                    VALUES (:name, :phone, :cep, :address, :complement, :neighborhood, :city, :state, :observations)";
 
         $stmt = $conn->prepare($query);
 
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":phone", $phone);
-        $stmt->bindParam(":observations", $observations);
-
+            $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":phone", $phone);
+            $stmt->bindParam(":cep", $cep);
+            $stmt->bindParam(":address", $address_data['address']['logradouro']);
+            $stmt->bindParam(":complement", $complement);
+            $stmt->bindParam(":neighborhood", $address_data['address']['bairro']);
+            $stmt->bindParam(":city", $address_data['address']['localidade']);
+            $stmt->bindParam(":state", $address_data['address']['uf']);
+            $stmt->bindParam(":observations", $observations);
         try {
             $stmt->execute();
             $_SESSION["msg"] = "Contato adicionado com sucesso!";
+
         } catch (PDOException $e) {
             // verificando erro
             $error = $e->getMessage();
@@ -51,25 +72,61 @@
                 $error = $e->getMessage();
                 echo "Erro: $error";
             }
+
+        //Editar contatos
         } else if ($data["type"] === "edit") {
 
             $name = $data["name"];
             $phone = $data["phone"];
+            $cep = $data["cep"];
+            $complement = $complement["complement"];
             $observations = $data["observations"];
             $id = $data["id"];
 
-            $query = "UPDATE contacts SET name = :name, phone = :phone, observations = :observations WHERE id = :id";
+        // Faz a consulta ao banco de dados para verificar se o contato existe
+        $query = "SELECT * FROM contacts WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $contact = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // Verifica se o contato foi encontrado
+        if (!$contact) {
+            $_SESSION["msg"] = "Contato não encontrado!";
+            header("Location: {$BASE_URL}index.php");
+            exit;
+        }
+
+        // Faz a consulta ao ViaCEP
+        $viacep = new ViaCEP($cep);
+        $address = $viacep->getAddress();
+
+        // Verifica se o endereço foi encontrado
+        if (isset($address['erro'])) {
+            $_SESSION["msg"] = "CEP não encontrado!";
+            header("Location: {$BASE_URL}edit.php?id=$id");
+            exit;
+        }
+
+
+            $query = "UPDATE contacts SET name = :name, phone = :phone, cep = :cep, address = :address, complement = :complement, neighborhood = :neighborhood, city = :city, state = :state, observations = :observations WHERE id = :id";
             $stmt = $conn->prepare($query);
 
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":phone", $phone);
+            $stmt->bindParam(":cep", $cep);
+            $stmt->bindParam(":address", $address_data['address']['logradouro']);
+            $stmt->bindParam(":complement", $complement);
+            $stmt->bindParam(":neighborhood", $address_data['address']['bairro']);
+            $stmt->bindParam(":city", $address_data['address']['localidade']);
+            $stmt->bindParam(":state", $address_data['address']['uf']);
             $stmt->bindParam(":observations", $observations);
             $stmt->bindParam(":id", $id);
 
             try {
                 $stmt->execute();
                 $_SESSION["msg"] = "Contato atualizado com sucesso!";
+                
             } catch (PDOException $e) {
                 // verificando erro
                 $error = $e->getMessage();
@@ -98,6 +155,8 @@
 
             // Retorna todos os contatos
         } else {
+
+            $contacts = [];
 
             $query = "SELECT * FROM contacts";
 
