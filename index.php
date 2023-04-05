@@ -7,19 +7,13 @@ include_once("templates/header.php");
     <?php endif; ?>
     <h1 id="main-title">My Contacts</h1>
     <?php if (count($contacts) > 0) : ?>
-        <table class="table table-responsive" id="contacts-table">
-            <thead>
+        <table class="table" id="contacts-table">
+            <thead >
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Telefone</th>
-                    <th scope="col" class="endereco">Endereço</th>
-                    <th scope="col">Complemento</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col"></th>
+                    
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -29,13 +23,7 @@ include_once("templates/header.php");
                         <th scope="row"><?= $contact["id"] ?></th>
                         <td><?= $contact["name"] ?></td>
                         <td><?= $contact["phone"] ?></td>
-                        <td><?= $contact["address"] ?></td>
-                        <td><?= $contact["complement"] ?></td>
-                        <td><?= $contact["neighborhood"] ?></td>
-                        <td><?= $contact["city"] ?></td>
-                        <td><?= $contact["state"] ?></td>
-                        <td><?= $contact["cep"] ?></td>
-
+                        
                         <td class="actions">
                             <a href="<?= $BASE_URL ?>show.php?id=<?= $contact['id'] ?>"><i class="fas fa-eye check-icon"></i></a>
                             <a href="<?= $BASE_URL ?>edit.php?id=<?= $contact['id'] ?>"><i class="far fa-edit edit-icon"></i></a>
