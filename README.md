@@ -4,28 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Contacts - README</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        h1 {
-            font-size: 2em;
-            margin-bottom: 0.5em;
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-bottom: 0.4em;
-        }
-        h3 {
-            font-size: 1.2em;
-            margin-bottom: 0.3em;
-        }
-        ul, ol {
-            margin-left: 1.2em;
-        }
-    </style>
+    
 </head>
 <body>
 
