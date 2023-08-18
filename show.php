@@ -13,7 +13,7 @@ if (isset($_SESSION['msg'])) {
         <p id="msg"><?= $printMsg ?></p>
     <?php endif; ?>
     <?php include_once("templates/backbtn.html"); ?>
-    
+
     <div class="row">
         <div class="col">
             <h1 id="main-title"><?= $contact["name"] ?></h1>
@@ -29,6 +29,10 @@ if (isset($_SESSION['msg'])) {
             </div>
         </div>
     </div>
+
+    <p class="bold">Email:</p>
+    <p><?= $contact["email"] ?></p>
+
     <p class="bold">Telefone:</p>
     <p><?= $contact["phone"] ?></p>
     <div class="row">

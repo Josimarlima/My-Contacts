@@ -9,6 +9,10 @@
             <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
         </div>
         <div class="form-group">
+            <label for="phone">Email do contato:</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required>
+        </div>
+        <div class="form-group">
             <label for="phone">Telefone do contato:</label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Digite o telefone" required>
         </div>
