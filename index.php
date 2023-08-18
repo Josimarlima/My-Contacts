@@ -10,7 +10,7 @@ include_once("templates/header.php");
         <table class="table" id="contacts-table">
             <thead >
                 <tr>
-                    <th scope="col">#</th>
+                    
                     <th scope="col">Nome</th>
                     <th scope="col">Telefone</th>
                     
@@ -20,7 +20,7 @@ include_once("templates/header.php");
             <tbody>
                 <?php foreach ($contacts as $contact) : ?>
                     <tr>
-                        <th scope="row"><?= $contact["id"] ?></th>
+                        
                         <td><?= $contact["name"] ?></td>
                         <td><?= $contact["phone"] ?></td>
                         

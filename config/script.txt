@@ -1,12 +1,14 @@
-CREATE TABLE contacts(
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255),
-  phone VARCHAR(20),
-  cep VARCHAR(10),
-  address VARCHAR(255),
-  complement VARCHAR(255),
-  neighborhood VARCHAR(255),
-  city VARCHAR(255),
-  state VARCHAR(255),
-  observations TEXT
-);
+CREATE TABLE `contacts_new` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `cep` varchar(10) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `complement` varchar(255) DEFAULT NULL,
+  `neighborhood` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `observations` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
