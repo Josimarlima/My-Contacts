@@ -9,14 +9,21 @@ $id = $_GET["id"];
     <form id="edit-form" action="<?= $BASE_URL ?>config/process.php" method="POST">
         <input type="hidden" name="type" value="edit">
         <input type="hidden" name="id" value="<?= $id ?>">
-        <div class="form-group">
-            <label for="name">Nome do contato:</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required value="<?= $contact["name"] ?>">
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome do contato:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required value="<?= $contact["name"] ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastname">Sobrenome do contato:</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Digite o sobrenome" required value="<?= $contact["lastname"] ?>">
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="phone">Email do contato:</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required value="<?= $contact["email"] ?>">
+            <label for="email">Email do contato:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required value="<?= $contact["email"] ?>">
         </div>
         <div class="form-group">
             <label for="phone">Telefone do contato:</label>
@@ -70,7 +77,6 @@ $id = $_GET["id"];
             });
         </script>
 
-
         <div class="form-group">
             <label for="address">Endereço:</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="Digite o endereço" required value="<?= $contact["address"] ?>">
@@ -83,13 +89,15 @@ $id = $_GET["id"];
             <label for="neighborhood">Bairro:</label>
             <input type="text" class="form-control" id="neighborhood" name="neighborhood" placeholder="Digite o bairro" required value="<?= $contact["neighborhood"] ?>">
         </div>
-        <div class="form-group">
-            <label for="city">Cidade:</label>
-            <input type="text" class="form-control" id="city" name="city" placeholder="Digite a cidade" required value="<?= $contact["city"] ?>">
-        </div>
-        <div class="form-group">
-            <label for="state">Estado:</label>
-            <input type="text" class="form-control" id="state" name="state" placeholder="Digite o estado" required value="<?= $contact["state"] ?>">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="city">Cidade:</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Digite a cidade" required value="<?= $contact["city"] ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="state">Estado:</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="Digite o estado" required value="<?= $contact["state"] ?>">
+            </div>
         </div>
 
         <div class="form-group">
@@ -99,8 +107,5 @@ $id = $_GET["id"];
         <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 </div>
-
-
-
 
 <?php include_once("templates/footer.php") ?>

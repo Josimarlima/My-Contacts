@@ -10,6 +10,12 @@ include_once("config/address.php");
             <label for="name">Nome do contato:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
         </div>
+
+        <div class="form-group">
+            <label for="name">Sobrenome do contato:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Digite o sobrenome" required>
+        </div>
+
         <div class="form-group">
             <label for="phone">Email do contato:</label>
             <input type="text" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required>
@@ -18,7 +24,7 @@ include_once("config/address.php");
             <label for="phone">Telefone do contato:</label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Digite o telefone" required>
         </div>
-        
+
         <div class="form-group">
             <label for="cep">CEP:</label>
             <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP" required>

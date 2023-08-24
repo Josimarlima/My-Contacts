@@ -1,4 +1,4 @@
-CREATE TABLE `contacts_new` (
+CREATE TABLE `contacts` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -12,3 +12,7 @@ CREATE TABLE `contacts_new` (
   `observations` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE contacts_new
+ADD COLUMN lastname varchar(255) DEFAULT NULL AFTER name;

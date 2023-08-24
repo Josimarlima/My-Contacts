@@ -10,10 +10,11 @@ $data = $_POST;
 
 if (!empty($data)) {
 
-    // Cria o contato
+    //------------------------------------------ Cria o contato
     if ($data["type"] === "create") {
 
         $name = $data["name"];
+        $lastname= $data["lastname"];
         $email = $data["email"];
         $phone = $data["phone"];
         $cep = $data["cep"];
@@ -39,12 +40,13 @@ if (!empty($data)) {
             exit;
         }
 
-        $query = "INSERT INTO contacts (name, email, phone, cep, address, complement, neighborhood, city, state, observations) 
-                    VALUES (:name, :email, :phone, :cep, :address, :complement, :neighborhood, :city, :state, :observations)";
+        $query = "INSERT INTO contacts (name,lastname, email, phone, cep, address, complement, neighborhood, city, state, observations) 
+                    VALUES (:name, :lastname, :email, :phone, :cep, :address, :complement, :neighborhood, :city, :state, :observations)";
 
         $stmt = $conn->prepare($query);
 
         $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":lastname", $lastname);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":phone", $phone);
         $stmt->bindParam(":cep", $cep);
@@ -87,6 +89,7 @@ if (!empty($data)) {
     } //-------------------------- Editar contatos ---------------------------------------
     else if ($data["type"] === "edit") {
         $name = $data["name"];
+        $lastname =$data["lastname"];
         $email = $data["email"];
         $phone = $data["phone"];
         $cep = $data["cep"];
@@ -109,18 +112,13 @@ if (!empty($data)) {
             exit;
         }
 
-        $query = "UPDATE contacts SET name = :name, email = :email, phone = :phone, cep = :cep, address = :address, complement = :complement, neighborhood = :neighborhood, city = :city, state = :state, observations = :observations WHERE id = :id";
+        $query = "UPDATE contacts SET name = :name, lastname = :lastname, email = :email, phone = :phone, cep = :cep, address = :address, complement = :complement, neighborhood = :neighborhood, city = :city, state = :state, observations = :observations WHERE id = :id";
         $stmt = $conn->prepare($query);
 
-        $stmt->bindParam(":name",
-            $name
-        );
-        $stmt->bindParam(":email",
-            $email
-        );
-        $stmt->bindParam(":phone",
-            $phone
-        );
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":lastname", $lastname);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":phone", $phone);
         $stmt->bindParam(":cep", $cep);
         $stmt->bindParam(":address", $address_data['address']['logradouro']);
         $stmt->bindParam(":complement", $complement);

@@ -16,7 +16,7 @@ if (isset($_SESSION['msg'])) {
 
     <div class="row">
         <div class="col">
-            <h1 id="main-title"><?= $contact["name"] ?></h1>
+            <h1 id="main-title"><?= $contact["name"] ?> <?= $contact["lastname"] ?></h1>
         </div>
         <div class="col-2">
             <div class="actions">
