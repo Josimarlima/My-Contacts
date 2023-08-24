@@ -1,5 +1,6 @@
 <?php
 include_once("templates/header.php");
+include_once("config/address.php");
 $id = $_GET["id"];
 ?>
 <div class="container">
@@ -23,13 +24,56 @@ $id = $_GET["id"];
         </div>
 
         <div class="form-group">
-            <label for="address">Endereço:</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="Digite o endereço" required value="<?= $contact["address"] ?>">
-        </div>
-        <div class="form-group">
             <label for="cep">CEP:</label>
             <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP" required value="<?= $contact["cep"] ?>">
-            <button type="button" class="btn btn-primary mt-3" onclick="searchAddress()">Buscar endereço</button>
+            <button type="button" id="search-cep" class="btn btn-primary mt-3">Buscar Endereço</button>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const searchCepButton = document.getElementById("search-cep");
+                searchCepButton.addEventListener("click", function() {
+                    const cepInput = document.getElementById("cep");
+                    const cep = cepInput.value.replace(/\D/g, '');
+
+                    if (cep.length === 8) {
+                        fetchCepData(cep);
+                    } else {
+                        alert("CEP inválido.");
+                    }
+                });
+
+                function fetchCepData(cep) {
+                    const url = `https://viacep.com.br/ws/${cep}/json/`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.erro) {
+                                populateAddressFields(data);
+                            } else {
+                                alert("CEP não encontrado!");
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            alert("Erro ao buscar CEP.");
+                        });
+                }
+
+                function populateAddressFields(data) {
+                    document.getElementById("address").value = data.logradouro;
+                    document.getElementById("neighborhood").value = data.bairro;
+                    document.getElementById("city").value = data.localidade;
+                    document.getElementById("state").value = data.uf;
+                }
+            });
+        </script>
+
+
+        <div class="form-group">
+            <label for="address">Endereço:</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Digite o endereço" required value="<?= $contact["address"] ?>">
         </div>
         <div class="form-group">
             <label for="complement">Complemento:</label>
@@ -55,5 +99,8 @@ $id = $_GET["id"];
         <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 </div>
+
+
+
 
 <?php include_once("templates/footer.php") ?>

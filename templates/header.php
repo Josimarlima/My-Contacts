@@ -1,6 +1,7 @@
 <?php
 include_once("config/url.php");
 include_once("config/process.php");
+include_once("config/address.php");
 
 // Limpa a mensagem de erro
 if (isset($_SESSION['msg'])) {

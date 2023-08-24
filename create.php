@@ -1,4 +1,6 @@
-<?php include_once("templates/header.php"); ?>
+<?php include_once("templates/header.php");
+include_once("config/address.php");
+?>
 <div class="container">
     <?php include_once("templates/backbtn.html"); ?>
     <h1 id="main-title">Criar Contato</h1>
@@ -16,11 +18,41 @@
             <label for="phone">Telefone do contato:</label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Digite o telefone" required>
         </div>
+        
         <div class="form-group">
             <label for="cep">CEP:</label>
             <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP" required>
-            <button type="button" class="btn btn-primary mt-3" onclick="searchAddress()">Buscar endereço</button>
+            <button type="button" class="btn btn-primary mt-3" id="searchCep">Buscar Endereço</button>
         </div>
+
+
+        <!-- Função searchAddress -->
+        <script>
+            document.getElementById("searchCep").addEventListener("click", function() {
+                var cep = document.getElementById("cep").value;
+                if (cep) {
+                    fetchAddress(cep);
+                }
+            });
+
+            function fetchAddress(cep) {
+                fetch("https://viacep.com.br/ws/" + cep + "/json/")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById("address").value = data.logradouro || '';
+                            document.getElementById("neighborhood").value = data.bairro || '';
+                            document.getElementById("city").value = data.localidade || '';
+                            document.getElementById("state").value = data.uf || '';
+                        } else {
+                            alert("CEP não encontrado!");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erro ao buscar o CEP:", error);
+                    });
+            }
+        </script>
         <div class="form-group">
             <label for="address">Endereço:</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="Digite o endereço">
@@ -49,97 +81,6 @@
     </form>
 </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $('#cep').blur(function() {
-            var cep = $(this).val().replace(/\D/g, '');
-            if (cep != "") {
-                var validacep = /^[0-9]{8}$/;
-                if (validacep.test(cep)) {
-                    $('#address').val("...");
-                    $('#neighborhood').val("...");
-                    $('#city').val("...");
-                    $('#state').val("...");
-                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(data) {
-                        if (!("erro" in data)) {
-                            $('#address').val(data.logradouro);
-                            $('#complement').val(data.complemento);
-                            $('#neighborhood').val(data.bairro);
-                            $('#city').val(data.localidade);
-                            $('#state').val(data.uf);
-                        } else {
-                            alert("CEP não encontrado.");
-                            $('#cep').val("");
-                            $('#address').val("");
-                            $('#complement').val("");
-                            $('#neighborhood').val("");
-                            $('#city').val("");
-                            $('#state').val("");
-                        }
-                    });
-                } else {
-                    alert("Formato de CEP inválido.");
-                    $('#cep').val("");
-                    $('#address').val("");
-                    $('#complement').val("");
-                    $('#neighborhood').val("");
-                    $('#city').val("");
-                    $('#state').val("");
-                }
-            } else {
-                $('#address').val("");
-                $('#complement').val("");
-                $('#neighborhood').val("");
-                $('#city').val("");
-                $('#state').val("");
-            }
-        });
-    });
-
-    function searchAddress() {
-        var cep = $('#cep').val().replace(/\D/g, '');
-        if (cep != "") {
-            var validacep = /^[0-9]{8}$/;
-            if (validacep.test(cep)) {
-                $('#address').val("...");
-                $('#neighborhood').val("...");
-                $('#city').val("...");
-                $('#state').val("...");
-                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(data) {
-                    if (!("erro" in data)) {
-                        $('#address').val(data.logradouro);
-                        $('#complement').val(data.complemento);
-                        $('#neighborhood').val(data.bairro);
-                        $('#city').val(data.localidade);
-                        $('#state').val(data.uf);
-                    } else {
-                        alert("CEP não encontrado.");
-                        $('#cep').val("");
-                        $('#address').val("");
-                        $('#complement').val("");
-                        $('#neighborhood').val("");
-                        $('#city').val("");
-                        $('#state').val("");
-                    }
-                });
-            } else {
-                alert("Formato de CEP inválido.");
-                $('#cep').val("");
-                $('#address').val("");
-                $('#complement').val("");
-                $('#neighborhood').val("");
-                $('#city').val("");
-                $('#state').val("");
-            }
-        } else {
-            $('#address').val("");
-            $('#complement').val("");
-            $('#neighborhood').val("");
-            $('#city').val("");
-            $('#state').val("");
-        }
-    }
-</script>
 
 
 
