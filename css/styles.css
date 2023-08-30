@@ -1,31 +1,33 @@
 /*config do logo*/
 .navbar-brand img {
-    width: 50px;
+    width: 10%;
+    /* Ajuste conforme necessário */
 }
 
-.navbarNav{
-justify-content: flex-end;
+.navbarNav {
+    justify-content: flex-end;
 }
 
 .navbar-brand {
     background-color: #0b3460;
 }
+
 /*menus da nav bar nav bar*/
-#home-link{
+#home-link {
     background-color: #0b3460;
 }
 
-
 #main-title {
     text-align: center;
-    margin: 15px 0 30px;
+    margin: 2% 0 4%;
+    /* Ajuste conforme necessário */
 }
 
 /* HOME */
 #contacts-table {
-    
     margin: 0 auto;
-    width: 100%;
+    width: 96%;
+    /* Ajuste conforme necessário */
     overflow-x: auto;
 }
 
@@ -34,9 +36,22 @@ justify-content: flex-end;
     background-color: #0b3460;
 }
 
-/*  ajuste do tamanhao da linha sem quebra de texto*/
+/*  ajuste do tamanhao da linha sem quebra de texto */
 #contacts-table td {
     white-space: nowrap;
+}
+
+/* Defina as larguras das colunas em porcentagem */
+.col-name {
+    width: 30%;
+}
+
+.col-lastname {
+    width: 30%;
+}
+
+.col-phone {
+    width: 20%;
 }
 
 .col-id {
@@ -45,12 +60,14 @@ justify-content: flex-end;
 
 .actions {
     text-align: right;
-    width: 150px;
+    width: 25%;
+    /* Ajuste conforme necessário */
 }
 
 .actions i {
-    font-size: 18px;
-    margin-right: 5px;
+    font-size: 5%;
+    /* Ajuste conforme necessário */
+    margin-right: 5%;
 }
 
 .check-icon {
@@ -83,16 +100,20 @@ justify-content: flex-end;
     color: #155724;
     background-color: #D4EDDA;
     border: 1px solid #C3E6CB;
-    padding: 10px;
+    padding: 2%;
+    /* Ajuste conforme necessário */
     text-align: center;
-    max-width: 500px;
+    max-width: 50%;
+    /* Ajuste conforme necessário */
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 3%;
+    /* Ajuste conforme necessário */
 }
 
 /* SHOW / CONTATO INDIVIDUAL */
 #view-contact-container {
-    max-width: 500px;
+    max-width: 50%;
+    /* Ajuste conforme necessário */
     margin: 0 auto;
 }
 
@@ -102,8 +123,9 @@ justify-content: flex-end;
 
 #back-link-container {
     display: block;
-    width: 500px;
-    margin: 30px auto 0;
+    width: 50%;
+    /* Ajuste conforme necessário */
+    margin: 4% auto 0;
 }
 
 /*botão voltar*/
@@ -111,15 +133,15 @@ justify-content: flex-end;
     border: 1px solid #0b3460;
     color: #0b3460;
     border-radius: 4px;
-    padding: 5px;
+    padding: 1%;
+    /* Ajuste conforme necessário */
 }
 
 #back-link:hover {
     text-decoration: none;
 }
 
-/* Menus do show*/
-
+/* Menus do show */
 .contact-name div {
     display: flex;
     justify-content: space-between;
@@ -134,23 +156,13 @@ justify-content: flex-end;
 /* CREATE */
 #create-form,
 #edit-form {
-    max-width: 500px;
+    max-width: 50%;
+    /* Ajuste conforme necessário */
     margin: 0 auto;
 }
 
-/* Estilo para a mensagem de aviso ou resultado no modal */
-.modal-warning {
-    color: red;
-    /* Cor do texto */
-    font-weight: bold;
-    /* Peso da fonte */
-    margin-bottom: 20px;
-    /* Espaçamento inferior */
-}
-
 /* Responsividade */
-@media(max-width: 480px) {
-
+@media (max-width: 480px) {
     #home-link {
         display: none;
     }
@@ -161,19 +173,73 @@ justify-content: flex-end;
     }
 
     .actions {
-        width: 120px;
+        width: 20%;
+        /* Ajuste conforme necessário */
     }
-
 }
 
 /* Defina o tamanho do modal conforme necessário */
 .modal-sm {
-    max-width: 300px;
+    max-width: 10%;
+    /* Ajuste conforme necessário */
     /* Defina a largura desejada para o modal pequeno */
 }
 
 /* Ajuste o tamanho do modal de pesquisa em porcentagem */
 #searchResultsModal .modal-dialog {
     max-width: 80%;
+    /* Ajuste conforme necessário */
     /* Defina a largura desejada em porcentagem */
 }
+
+/* Adicione estas classes para limitar o tamanho do bloco de botões */
+.button-menu-container {
+    max-width: 96%;
+    /* Ajuste conforme necessário */
+    margin: 0 auto;
+    /* Centralizar horizontalmente */
+}
+
+.button-menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.search-container,
+.sort-form {
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+    /* Adicione uma margem esquerda para separar as colunas */
+}
+
+#search-type,
+#search-input,
+#order {
+    /* Estilos dos inputs/selects */
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 1%;
+    width: 30%;
+}
+
+#search-button,
+.sort-button {
+    /* Estilos dos botões */
+    padding: 2%;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#search-button:hover,
+.sort-button:hover {
+    background-color: #0056b3;
+}
+
