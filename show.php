@@ -12,8 +12,9 @@ if (isset($_SESSION['msg'])) {
     <?php if (isset($printMsg) && $printMsg != "") : ?>
         <p id="msg"><?= $printMsg ?></p>
     <?php endif; ?>
-    <?php include_once("templates/backbtn.html"); ?>
-
+    <p></p>
+    <p></p>
+    <p></p>
     <div class="row">
         <div class="col">
             <h1 id="main-title"><?= $contact["name"] ?> <?= $contact["lastname"] ?></h1>

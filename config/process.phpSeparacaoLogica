@@ -1,0 +1,53 @@
+<?php
+session_start();
+
+include_once("connection.php");
+include_once("url.php");
+include_once("address.php");
+include_once("logAction.php");
+
+$data = $_POST;
+
+if (!empty($data)) {
+    if ($data["type"] === "create") {
+        include_once("createLogic.php");
+    } elseif ($data["type"] === "edit") {
+        include_once("editLogic.php");
+    } elseif ($data["type"] === "delete") {
+        include_once("deleteLogic.php");
+    }
+} else {
+    $id = null; // Inicialize com um valor padrão
+
+    if (!empty($_GET["id"])) {
+        $id = $_GET["id"];
+    }
+    
+    // Retorna dados de um contato específico
+    if (!empty($id)) {
+        $query = "SELECT * FROM contacts WHERE id = :id";
+
+        $stmt = $conn->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $contact = $stmt->fetch();
+    } else {
+        $contacts = [];
+
+        $query = "SELECT * FROM contacts";
+
+        $stmt = $conn->prepare($query);
+
+        $stmt->execute();
+
+        $contacts = $stmt->fetchAll();
+    }
+    
+    // Lógica adicional aqui, se necessário
+    
+    // Redirecionar para a página principal
+    header("Location: " . $BASE_URL . "../index.php");
+}

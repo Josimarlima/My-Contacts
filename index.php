@@ -47,7 +47,7 @@ include_once("templates/header.php");
                 <th scope="col" class="col-name">Nome</th>
                 <th scope="col" class="col-lastname">Sobrenome</th>
                 <th scope="col" class="col-phone">Telefone</th>
-                <th scope="col"></th>
+                <th scope="col" class="col-action"></th>
             </tr>
         </thead>
 

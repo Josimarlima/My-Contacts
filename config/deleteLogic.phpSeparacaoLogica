@@ -1,0 +1,38 @@
+<?php
+//deleteLogic.php
+session_start();
+
+
+
+$data = $_POST;
+
+if (!empty($data) && $data["type"] === "delete") {
+    $id = $data["id"];
+
+    // Obter detalhes do contato antes da exclusão
+    $stmt = $conn->prepare("SELECT * FROM contacts WHERE id = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $contactBeforeDelete = $stmt->fetch();
+
+    $query = "DELETE FROM contacts WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+
+    try {
+        $stmt->execute();
+        $_SESSION["msg"] = "Contato removido com sucesso!";
+    } catch (PDOException $e) {
+        $error = $e->getMessage();
+        echo "Erro: $error";
+    }
+
+    $logAction = "Excluiu um contato";
+    createLog($logAction, $contactBeforeDelete, null);
+
+    header("Location: " . $BASE_URL . "../index.php");
+} elseif (!empty($data) && $data["type"] === "edit") {
+    header("Location: " . $BASE_URL . "../edit.php?id=" . $data["id"]);
+} else {
+    header("Location: " . $BASE_URL . "../index.php");
+}

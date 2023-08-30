@@ -1,0 +1,79 @@
+<?php
+//createLogic.php
+session_start();
+
+
+
+$data = $_POST;
+
+if (!empty($data) && $data["type"] === "create") {
+    $name = $data["name"];
+    $lastname = $data["lastname"];
+    $email = $data["email"];
+    $phone = $data["phone"];
+    $cep = $data["cep"];
+    $complement = $data["complement"] ?? '';
+    $observations = $data["observations"];
+
+    // Faz a consulta ao ViaCEP
+    $viacep = new ViaCEP($cep);
+    $address_data = $viacep->getAddress();
+
+    if (!isset($address_data['erro'])) {
+        $address = $address_data['address']['logradouro'];
+        $neighborhood = $address_data['address']['bairro'];
+        $city = $address_data['address']['localidade'];
+        $state = $address_data['address']['uf'];
+    } else {
+        $_SESSION["msg"] = "CEP não encontrado!";
+        header("Location: {$BASE_URL}create.php");
+        exit;
+    }
+
+    $query = "INSERT INTO contacts (name, lastname, email, phone, cep, address, complement, neighborhood, city, state, observations) 
+                VALUES (:name, :lastname, :email, :phone, :cep, :address, :complement, :neighborhood, :city, :state, :observations)";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":lastname", $lastname);
+    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":phone", $phone);
+    $stmt->bindParam(":cep", $cep);
+    $stmt->bindParam(":address", $address);
+    $stmt->bindParam(":complement", $complement);
+    $stmt->bindParam(":neighborhood", $neighborhood);
+    $stmt->bindParam(":city", $city);
+    $stmt->bindParam(":state", $state);
+    $stmt->bindParam(":observations", $observations);
+
+    try {
+        $stmt->execute();
+        $_SESSION["msg"] = "Contato adicionado com sucesso!";
+    } catch (PDOException $e) {
+        $error = $e->getMessage();
+        echo "Erro: $error";
+    }
+
+    $logAction = "Criou um novo contato";
+    $newContactId = $conn->lastInsertId(); 
+    $newContactData = [
+        "name" => $name,
+        "lastname" => $lastname,
+        "email" => $email,
+        "phone" => $phone,
+        "cep" => $cep,
+        "complement" => $complement,
+        "address" => $address,
+        "neighborhood" => $neighborhood,
+        "city" => $city,
+        "state" => $state,
+        "observations" => $observations,            
+    ];
+
+    createLog($logAction, null, $newContactData);
+
+    header("Location: " . $BASE_URL . "../index.php");
+} else {
+    header("Location: " . $BASE_URL . "../index.php");
+}

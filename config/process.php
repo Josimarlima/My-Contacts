@@ -15,7 +15,7 @@ if (!empty($data)) {
     if ($data["type"] === "create") {
 
         $name = $data["name"];
-        $lastname= $data["lastname"];
+        $lastname = $data["lastname"];
         $email = $data["email"];
         $phone = $data["phone"];
         $cep = $data["cep"];
@@ -80,7 +80,7 @@ if (!empty($data)) {
             "neighborhood" => $neighborhood,
             "city" => $city,
             "state" => $state,
-            "observations" => $observations,            
+            "observations" => $observations,
 
         ];
 
@@ -99,7 +99,7 @@ if (!empty($data)) {
         $stmt->bindParam(":id", $id);
 
         // Obtém o ID do contato excluído
-        $contactId = $data["id"]; 
+        $contactId = $data["id"];
 
         // Obtém os detalhes do contato antes da exclusão
         $query = "SELECT * FROM contacts WHERE id = :id";
@@ -120,11 +120,10 @@ if (!empty($data)) {
         // cria log de exclusão no no banco de dados
         $logAction = "Excluiu um contato";
         createLog($logAction, $contactBeforeDelete, null);
-        
     } //-------------------------- Editar contatos ---------------------------------------
     else if ($data["type"] === "edit") {
         $name = $data["name"];
-        $lastname =$data["lastname"];
+        $lastname = $data["lastname"];
         $email = $data["email"];
         $phone = $data["phone"];
         $cep = $data["cep"];
@@ -162,8 +161,8 @@ if (!empty($data)) {
         $stmt->bindParam(":address", $address_data['address']['logradouro']);
         $stmt->bindParam(":complement", $complement);
         $stmt->bindParam(":neighborhood", $address_data['address']['bairro']);
-        $stmt->bindParam(":city",$address_data['address']['localidade']);
-        $stmt->bindParam(":state",$address_data['address']['uf']);
+        $stmt->bindParam(":city", $address_data['address']['localidade']);
+        $stmt->bindParam(":state", $address_data['address']['uf']);
         $stmt->bindParam(":observations", $observations);
         $stmt->bindParam(":id", $id);
 
@@ -182,7 +181,7 @@ if (!empty($data)) {
         $logAction = "Editou um contato";
         createLog($logAction, $contactBeforeEdit, $contactAfterEdit);
     }
-   
+
 
     // Redirecionar para a página principal após as operações
     header("Location: " . $BASE_URL . "../index.php");
@@ -218,5 +217,4 @@ if (!empty($data)) {
 
         $contacts = $stmt->fetchAll();
     }
-    
 }

@@ -58,16 +58,18 @@
     font-weight: bold;
 }
 
+/* Estilos para ações dentro da tabela de contatos */
 .actions {
     text-align: right;
-    width: 25%;
-    /* Ajuste conforme necessário */
+    width: 12%;
+    /* Reduz a largura para ajustar o espaço */
 }
 
 .actions i {
-    font-size: 5%;
-    /* Ajuste conforme necessário */
-    margin-right: 5%;
+    font-size: 18px;
+    /* Ajusta o tamanho do ícone */
+    margin-right: 10px;
+    /* Ajusta a margem à direita */
 }
 
 .check-icon {
@@ -208,18 +210,17 @@
     margin-bottom: 2%;
 }
 
-.search-container,
-.sort-form {
+/* Estilos para o container dos elementos de pesquisa */
+.search-container {
     display: flex;
     align-items: center;
     margin-left: 2%;
     /* Adicione uma margem esquerda para separar as colunas */
 }
 
+/* Estilos para os inputs de pesquisa */
 #search-type,
-#search-input,
-#order {
-    /* Estilos dos inputs/selects */
+#search-input {
     padding: 2%;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -227,9 +228,8 @@
     width: 30%;
 }
 
-#search-button,
-.sort-button {
-    /* Estilos dos botões */
+/* Estilos para o botão de pesquisa */
+#search-button {
     padding: 2%;
     border: none;
     background-color: #007BFF;
@@ -238,7 +238,37 @@
     cursor: pointer;
 }
 
-#search-button:hover,
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para o container dos elementos de ordenação */
+.sort-form {
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+    /* Adicione uma margem esquerda para separar as colunas */
+}
+
+/* Estilos para o select de ordenação */
+#order {
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 1%;
+    width: 40%;
+}
+
+/* Estilos para o botão de ordenação */
+.sort-button {
+    padding: 2%;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .sort-button:hover {
     background-color: #0056b3;
 }
