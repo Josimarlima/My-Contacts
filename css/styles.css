@@ -138,6 +138,16 @@ justify-content: flex-end;
     margin: 0 auto;
 }
 
+/* Estilo para a mensagem de aviso ou resultado no modal */
+.modal-warning {
+    color: red;
+    /* Cor do texto */
+    font-weight: bold;
+    /* Peso da fonte */
+    margin-bottom: 20px;
+    /* Espaçamento inferior */
+}
+
 /* Responsividade */
 @media(max-width: 480px) {
 
@@ -154,4 +164,16 @@ justify-content: flex-end;
         width: 120px;
     }
 
+}
+
+/* Defina o tamanho do modal conforme necessário */
+.modal-sm {
+    max-width: 300px;
+    /* Defina a largura desejada para o modal pequeno */
+}
+
+/* Ajuste o tamanho do modal de pesquisa em porcentagem */
+#searchResultsModal .modal-dialog {
+    max-width: 80%;
+    /* Defina a largura desejada em porcentagem */
 }

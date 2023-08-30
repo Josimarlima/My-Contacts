@@ -1,6 +1,7 @@
 CREATE TABLE `contacts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `cep` varchar(10) DEFAULT NULL,
@@ -9,10 +10,5 @@ CREATE TABLE `contacts` (
   `neighborhood` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
-  `observations` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `observations` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-ALTER TABLE contacts_new
-ADD COLUMN lastname varchar(255) DEFAULT NULL AFTER name;

@@ -2,6 +2,11 @@
 include_once("config/url.php");
 include_once("config/process.php");
 include_once("config/address.php");
+include_once("config/searchLogic.php");
+include_once("config/order.php");
+include_once("templates/searchModal.php");
+
+//include_once("config/search.php");
 
 // Limpa a mensagem de erro
 if (isset($_SESSION['msg'])) {

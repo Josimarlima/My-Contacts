@@ -1,4 +1,5 @@
-<?php include_once("templates/header.php");
+<?php
+include_once("templates/header.php");
 include_once("config/address.php");
 ?>
 <div class="container">
@@ -6,19 +7,20 @@ include_once("config/address.php");
     <h1 id="main-title">Criar Contato</h1>
     <form id="create-form" action="<?= $BASE_URL ?>config/process.php" method="POST">
         <input type="hidden" name="type" value="create">
-        <div class="form-group">
-            <label for="name">Nome do contato:</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome do contato:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastname">Sobrenome do contato:</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Digite o sobrenome" required>
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="name">Sobrenome do contato:</label>
-            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Digite o sobrenome" required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Email do contato:</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required>
+            <label for="email">Email do contato:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail" required>
         </div>
         <div class="form-group">
             <label for="phone">Telefone do contato:</label>
@@ -30,7 +32,6 @@ include_once("config/address.php");
             <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP" required>
             <button type="button" class="btn btn-primary mt-3" id="searchCep">Buscar Endereço</button>
         </div>
-
 
         <!-- Função searchAddress -->
         <script>
@@ -59,6 +60,8 @@ include_once("config/address.php");
                     });
             }
         </script>
+
+        <!-- Restante do formulário -->
         <div class="form-group">
             <label for="address">Endereço:</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="Digite o endereço">
@@ -87,9 +90,5 @@ include_once("config/address.php");
     </form>
 </div>
 </div>
-
-
-
-
 
 <?php include_once("templates/footer.php"); ?>

@@ -5,12 +5,13 @@ session_start();
 include_once("connection.php");
 include_once("url.php");
 include_once("address.php");
+include_once("logAction.php");
 
 $data = $_POST;
 
 if (!empty($data)) {
 
-    //------------------------------------------ Cria o contato
+    //------------------------------------------ Cria o contato -------
     if ($data["type"] === "create") {
 
         $name = $data["name"];
@@ -66,8 +67,29 @@ if (!empty($data)) {
             echo "Erro: $error";
         }
 
-        //Deleta contato
+        $logAction = "Criou um novo contato";
+        $newContactId = $conn->lastInsertId(); // Obtém o ID do novo contato
+        $newContactData = [
+            "name" => $name,
+            "lastname" => $lastname,
+            "email" => $email,
+            "phone" => $phone,
+            "cep" => $cep,
+            "complement" => $complement,
+            "address" => $address,
+            "neighborhood" => $neighborhood,
+            "city" => $city,
+            "state" => $state,
+            "observations" => $observations,            
+
+        ];
+
+        // log de criação do contato
+        $logAction = "Criou um novo contato";
+        createLog($logAction, null, $newContactData);
+        //----------------------------- Deleta contato --------------------
     } else if ($data["type"] === "delete") {
+
         $id = $data["id"];
 
         $query = "DELETE FROM contacts WHERE id = :id";
@@ -75,6 +97,17 @@ if (!empty($data)) {
         $stmt = $conn->prepare($query);
 
         $stmt->bindParam(":id", $id);
+
+        // Obtém o ID do contato excluído
+        $contactId = $data["id"]; 
+
+        // Obtém os detalhes do contato antes da exclusão
+        $query = "SELECT * FROM contacts WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":id", $contactId);
+        $stmt->execute();
+        $contactBeforeDelete = $stmt->fetch();
+
 
         try {
             $stmt->execute();
@@ -84,7 +117,9 @@ if (!empty($data)) {
             $error = $e->getMessage();
             echo "Erro: $error";
         }
-
+        // cria log de exclusão no no banco de dados
+        $logAction = "Excluiu um contato";
+        createLog($logAction, $contactBeforeDelete, null);
         
     } //-------------------------- Editar contatos ---------------------------------------
     else if ($data["type"] === "edit") {
@@ -96,7 +131,11 @@ if (!empty($data)) {
         $complement = $data["complement"];
         $observations = $data["observations"];
         $id = $data["id"];
-
+        // Obter detalhes do contato antes da edição
+        $stmt = $conn->prepare("SELECT * FROM contacts WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $contactBeforeEdit = $stmt->fetch();
         // Faz a consulta ao ViaCEP
         $viacep = new ViaCEP($cep);
         $address_data = $viacep->getAddress(); // Obter dados do endereço novamente
@@ -136,15 +175,21 @@ if (!empty($data)) {
             $error = $e->getMessage();
             echo "Erro: $error";
         }
-    }
 
+        $stmt->execute();
+        $contactAfterEdit = $stmt->fetch();
+        //log de edição do contato
+        $logAction = "Editou um contato";
+        createLog($logAction, $contactBeforeEdit, $contactAfterEdit);
+    }
+   
 
     // Redirecionar para a página principal após as operações
     header("Location: " . $BASE_URL . "../index.php");
 } else {
-    $id;
+    $id = null; // Inicialize com um valor padrão
 
-    if (!empty($_GET)) {
+    if (!empty($_GET["id"])) {
         $id = $_GET["id"];
     }
     // Retorna dado de um post específico
@@ -173,4 +218,5 @@ if (!empty($data)) {
 
         $contacts = $stmt->fetchAll();
     }
+    
 }
