@@ -12,3 +12,11 @@ CREATE TABLE `contacts` (
   `state` varchar(255) DEFAULT NULL,
   `observations` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `contact_id` int(11) DEFAULT NULL,
+  `changes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

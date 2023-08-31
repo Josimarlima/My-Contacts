@@ -1,5 +1,22 @@
 CREATE TABLE `contacts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(150) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `observations` text DEFAULT NUL
+  `cep` varchar(10) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `complement` varchar(255) DEFAULT NULL,
+  `neighborhood` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `observations` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `contact_id` int(11) DEFAULT NULL,
+  `changes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -186,7 +186,7 @@ if (!empty($data)) {
     // Redirecionar para a página principal após as operações
     header("Location: " . $BASE_URL . "../index.php");
 } else {
-    $id = null; // Inicialize com um valor padrão
+    $id = null; // Inicializa com um valor padrão
 
     if (!empty($_GET["id"])) {
         $id = $_GET["id"];
